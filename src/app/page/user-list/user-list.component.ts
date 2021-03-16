@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,11 +14,9 @@ export class UserListComponent implements OnInit {
 
   users$: Observable<User[]> = this.userService.getAll();
 
-  //Filter
   filterKey: string = 'name';
   phrase: string = '';
 
-  //Sorter
   columnKey: string = '';
 
   constructor(
@@ -35,8 +33,10 @@ export class UserListComponent implements OnInit {
   }
 
   onDelete(user: User): void {
-    this.userService.remove(user);
-    this.router.navigate(["/"])
+    if (window.confirm('Are you sure you want to delete this item ?')) {
+      this.userService.remove(user),
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false; this.router.navigate([this.router.url]);
+    }
   }
 
 }

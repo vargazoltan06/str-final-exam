@@ -22,7 +22,7 @@
         <label>Address</label>
         <!-- Validation: min 8 char, max 100 char, required -->
         <input class="form-control" type="text" name="address" [(ngModel)]="user.address" pattern=".{8,100}" required>
-        <span [hidden]="userForm.controls.address?.valid" class="alert">The address minimum 8, maximum 40
+        <span [hidden]="userForm.controls.address?.valid" class="alert">The address minimum 8, maximum 100
           characters</span>
       </div>
       <div class="form-group">

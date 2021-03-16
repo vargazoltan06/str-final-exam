@@ -46,10 +46,8 @@ export class UserService {
    * Create a user in the database.
    * The method is: this.http.post
    */
-  create(user: User): void {
-    this.http.post<User>(`${this.endpoint}`, user).subscribe(
-      () => this.getAll()
-    );
+  create(user: User): Observable<User> {
+    return this.http.post<User>(`${this.endpoint}`, user);
   }
 
 
@@ -57,10 +55,7 @@ export class UserService {
    * Update a user in the database.
    * The method is: this.http.patch
    */
-  update(user: User): void {
-    this.http.patch<User>(`${this.endpoint}/${user.id}`, user).subscribe(
-      () => this.getAll()
-    );
-
+  update(user: User): Observable<User> {
+    return this.http.patch<User>(`${this.endpoint}/${user.id}`, user)
   }
 }
